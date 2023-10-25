@@ -1,5 +1,7 @@
 package studio6;
 
+import java.awt.Color;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class RecursiveMethods {
@@ -13,9 +15,11 @@ public class RecursiveMethods {
 	 */
 	public static double geometricSum(int n) {
 		
-			// FIXME compute the geometric sum for the first n terms recursively
-			return 0;
-		
+			if (n == 0) {
+				return 0;
+			} else {
+				return Math.pow(.5, n) + geometricSum(n-1);
+			}					
 	}
 
 	/**
@@ -54,13 +58,21 @@ public class RecursiveMethods {
 	 * @param yCenter                       y-coordinate of the center of the circle
 	 *                                      at the current depth
 	 * @param radius                        radius of the circle at the current
-	 *                                      depth
-	 * @param radiusMinimumDrawingThreshold radius above which drawing should occur
+	 *                                     StdDraw.setPenColor(Color.black);
+		StdDraw.circle(xCenter, yCenter, radius);radiusMinimumDrawingThreshold radius above which drawing should occur
 	 */
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
 			double radiusMinimumDrawingThreshold) {
 		
-		// FIXME
+		if (radius <= radiusMinimumDrawingThreshold) {
+			return;
+		} else {
+			circlesUponCircles(xCenter + radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter + radius, radius/3.0, radiusMinimumDrawingThreshold);	
+			circlesUponCircles(xCenter - radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);	
+			circlesUponCircles(xCenter, yCenter - radius, radius/3.0, radiusMinimumDrawingThreshold);	
+		}
+		StdDraw.circle(xCenter, yCenter, radius);
 	}
 
 }
